@@ -46,7 +46,7 @@ export function analyseDMMF(input: DMMFDocument): DMMFModels {
     )
     if (cursorField) {
       // Make sure custom cursor field is valid
-      if (!cursorField.isUnique) {
+      if (!cursorField.isUnique && !cursorField.isId) {
         throw new Error(errors.nonUniqueCursor(model.name, cursorField.name))
       }
       if (!supportedCursorTypes.includes(String(cursorField.type))) {

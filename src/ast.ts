@@ -87,7 +87,7 @@ export function analyseSchema(schemaSource: string): DMMFModels {
 
     if (cursorField) {
       // Make sure custom cursor field is valid
-      if (!hasAttribute(cursorField, 'unique')) {
+      if (!hasAttribute(cursorField, 'unique') && !hasAttribute(cursorField, 'id')) {
         throw new Error(errors.nonUniqueCursor(model.name, cursorField.name))
       }
       if (!supportedCursorTypes.includes(String(cursorField.fieldType))) {

@@ -144,6 +144,12 @@ export function decryptOnRead<Models extends string, Actions extends string>(
 ) {
   // Analyse the query to see if there's anything to decrypt.
   const model = models[params.model!]
+  if (!model) {
+    debug.decryption(
+      `Skipping decryption: model ${params.model} not found in encryption config`
+    )
+    return
+  }
   if (
     Object.keys(model.fields).length === 0 &&
     !params.args?.include &&
